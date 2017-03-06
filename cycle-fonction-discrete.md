@@ -49,7 +49,7 @@ Un ensemble connexe $X'$ d'une fonction $f:X \to X$ est un sous-ensemble de $X$ 
 
 Soit une fonction $f:X \to X$ sur un ensemble $X$ fini et $\mathcal{P}_f[\lambda]$, son polynôme caractéristique, alors 
 
-$$\mathcal{P}_f[\lambda] = \lambda^{|Z|} \prod_{\mathcal{C_i} \in C} (\lambda^{|\mathcal{C}_i|} - 1)$$
+$$\mathcal{P}_f[\lambda] = \lambda^{|Z|} \prod_{\mathcal{C}_i \in C} (\lambda^{|\mathcal{C}_i|} - 1)$$
 
 où $Z$ est l'ensemble des éléments de $X$ qui ne sont pas élément d'un cycle de $f$ et $C$ est l'ensemble des cycles de $f$.
 
@@ -80,7 +80,7 @@ La $x$-ième colonne de $A$ ne contient que des $0$, et donc $\operatorname{Det}
 
 On a 
 
-$$|X| = |Z| + \sum_{\mathcal{C_i} \in C} |\mathcal{C}_i|.$$
+$$|X| = |Z| + \sum_{\mathcal{C}_i \in C} |\mathcal{C}_i|.$$
 
 ## Existence de cycle
 
