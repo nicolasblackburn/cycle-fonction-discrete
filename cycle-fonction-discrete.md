@@ -41,11 +41,44 @@ $$f(x_i) = \left\{ \begin{aligned}
 
 On a le cas particulier d'un cycle d'ordre $1$ qui est appelé un point fixe.
 
-## Ensemble connexe
-
-Un ensemble connexe $X'$ d'une fonction $f:X \to X$ est un sous-ensemble de $X$ tel que pour tout éléments $x_1 \in X'$, il existe un élément $x_2 \in X'$ tel que $f(x_1) = x_2$ ou $f(x_2) = x_1$.
-
 ## Polynôme caractéristique
+
+### Lemme 1
+
+Soit une fonction $f:X \to X$ sur un ensemble $X$ fini. Supposons qu'il existe un élément $x_1 \in X$ tel que $f(x_i) \not = x_1$, pour tout $x_i \in X$. Alors 
+
+$$\mathcal{P}_f[\lambda] = \lambda \mathcal{P}_g[\lambda]$$
+
+où $g:B \to B$ est la restriction de $f$ au sous-ensemble $B$.
+
+Preuve:
+
+1. Soit $N = \{n \in \mathbb{N} | n \leq |X|\}$, il existe une bijection $h:X \to N$ telle que $h(x_i) = i$, pour tout élément $x_i \in X$. En particulier $h(x_1) = 1$.
+
+2. On a que $\mathcal{P}_{h \circ f \circ h^{-1}}[\lambda] = \mathcal{P}_f[\lambda]$. Soit $M_f = \operatorname{Adj} f$ et $M_h = \operatorname{Adj} h$ alors $\operatorname{Det} (\lambda I - M_h M_f M_h^{-1}) = \operatorname{Det} (\lambda I - M_f)$.
+
+3. Puisque pour tout élément $f(x_i) \not = x_1$ alors $h \circ f \circ h^{-1} (n) \not = 1$ pour tout $n \in N$. 
+
+4. La $M$, matrice d'adjacence de $h \circ f \circ h^{-1}$ est une matrice dont la première ligne ne contient que des $0$ alors $\lambda I - M$ est une matrice bloc triangulaire inférieure
+
+$$
+\begin{bmatrix}
+    [\lambda] & 0 \\
+    A & B 
+\end{bmatrix}
+.$$
+
+5. Alors $\mathcal{P}_{h \circ f \circ h^{-1}}[\lambda] = \lambda \operatorname{Det} B = \lambda \mathcal{P}_g[\lambda]$.
+
+### Lemme 2
+
+Soit $\mathcal C:X \to X$, un $n$-cycle de $X$, $n = |X|$, alors $\mathcal{P}_{\mathcal C}[\lambda] = (\lambda^n - 1)$.
+
+Preuve:
+
+... Todo ...
+
+### Théorème 1
 
 Soit une fonction $f:X \to X$ sur un ensemble $X$ fini et $\mathcal{P}_f[\lambda]$, son polynôme caractéristique, alors 
 
@@ -55,37 +88,28 @@ où $Z$ est l'ensemble des éléments de $X$ qui ne sont pas élément d'un cycl
 
 Preuve:
 
-Pour tout élément $z \in Z$, il existe un entier $k > 0$ minimal tel que $f^k(z) \in Z$, sinon il y aurait contradiction avec le fait que les éléments de $Z$ ne sont pas élément d'un cycle.
-
-Alors il existe au moins un élément $z \in Z$ tel que $f(z) \not \in Z$. Soit $Z_1$, l'ensemble des éléments de $Z$ tels que $f(z) \in Z$ si $z \in Z_1$ et $Z_2$, l'ensemble des éléments de $Z$ tels que $f(z) \not \in Z$ si $z \in Z_2$. 
-
-Soit $Z = \{z_i\}$, $i$ allant de $1$ à $|Z|$ et l'application $g:Z \to \mathbb{N}$ définie telle que $g(z_i) = i$. L'application $g$ est bijective et $g \circ f \circ g^{-1}$ a le même polynôme caractéristique que $f$.
-
-Comme $f$ appliqué sur tout élément $x \in \overline Z$ est un élément de $\overline Z$, alors on a que la matrice de $g \circ f \circ g^{-1}$ est une matrice bloc triangulaire 
-
-$\left[ \begin{array}{cc}
-    A & 0 \\
-    B & C 
-\end{array} \right]$
-
-et donc que $\mathcal{P}_f(\lambda) = \mathcal{P}_A(\lambda)\mathcal{P}_B(\lambda)$.
-
-Le polynôme caractéristique $\mathcal{P}_A(\lambda) = \lambda^{|Z|}$. En effet pour tout $x \leq |Z|$, soit $g^{-1}(x) \in Z_1$ et $g \circ f \circ g^{-1} (x) \geq |Z|$, ou $g^{-1}(x) \in Z_2$ et $g \circ f \circ g^{-1} (x) > |Z|$.
-
-Cas où $g^{-1}(x) \in Z_2$:
-
-La $x$-ième colonne de $A$ ne contient que des $0$, et donc $\operatorname{Det} (\lambda I - A) = \lambda^{|Z_2|}\operatorname{Det} (\lambda I - A')$, où $A'$ est la sous-matrice de $A$ où les $x$-ièmes colonnes et rangées de $A$ ont été supprimées, pour tout $x \in Z_2$.  
+Par induction sur l'ensemble $Z$ en utilisant le lemme 1 et ensuite sur $C$ en utilisant le lemme 2.
 
 ## Formule de comptage
 
-On a 
+Une petite formule qui ressemble au lemme de Burnside en théorie des groupes:
 
-$$|X| = |Z| + \sum_{\mathcal{C}_i \in C} |\mathcal{C}_i|.$$
+$$|X| = |Z| + \sum_{\mathcal{C}_i \in C} |\mathcal{C}_i|$$
+
+Preuve:
+
+...todo...
 
 ## Existence de cycle
+
+### Théorème 2
 
 Si la fonction $f:\mathbb{N} \to \mathbb{N}$ a un cycle d'ordre $k$, alors il existe $M_n$, une matrice d'adjacence partielle de $f$ d'ordre $n$, telle que $(\lambda^k - 1)$ divise $\mathcal{P}_{M_n}[\lambda]$. 
 
 Si $f$ n'a pas de cycle alors $\mathcal{P}_{M_n}[\lambda] = \lambda^n$ pour toute matrice $M_n$ d'adjacence partielle de $f$ d'ordre $n$.
+
+Preuve:
+
+Corrolaire du théorème 1
 
 ## Conclusion
