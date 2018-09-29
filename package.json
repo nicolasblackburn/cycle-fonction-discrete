@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tex2svg": "tex2svg",
-    "btoa": "node btoa.js"
+    "tex2svg": "node tex2svg.js"
   },
   "repository": {
     "type": "git",
