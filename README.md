@@ -11,11 +11,11 @@ De plus, nous verrons que l'étude du polynôme caractéristique de la matrice d
 ## Notations et conventions
 
 1. ![$f^0(x) = x$](images/Zl4wKHgpID0geA__.svg), pour tout ![$x$](images/eA__.svg), autrement dit ![$f^0$](images/Zl4w.svg) est la fonction identité
-2. $f^1(x) = f(x)$, pour tout $n$ entier et $n \geq 1$
-3. $f^n(x) = f^{n-1}(f(x))$, pour tout $n$ entier et $n \geq 1$
-4. $(f \circ g) (x) = f(g(x))$, la composition de fonctions
-5. $\mathbb{N}$ désigne l'ensemble des entiers plus grands ou égaux à $1$
-6. $X$ désigne $\mathbb{N}$ ou un sous-ensemble de $\mathbb{N}$ tel que $1 \in X$ et si $x \in X$, alors $(x+1) \in X$ sauf si $x$ est le maximum de $X$
+2. ![$f^1(x) = f(x)$](images/Zl4xKHgpID0gZih4KQ__.svg), pour tout $n$ entier et ![$n \geq 1$](images/biBcZ2VxIDE_.svg)
+3. ![$f^n(x) = f^{n-1}(f(x))$](images/Zl5uKHgpID0gZl57bi0xfShmKHgpKQ__.svg), pour tout ![$n$](images/bg__.svg) entier et [$n \geq 1$](images/biBcZ2VxIDE_.svg)
+4. ![$(f \circ g) (x) = f(g(x))$](images/KGYgXGNpcmMgZykgKHgpID0gZihnKHgpKQ__.svg), la composition de fonctions
+5. ![$\mathbb{N}$](images/XG1hdGhiYntOfQ__.svg) désigne l'ensemble des entiers plus grands ou égaux à ![$1$](images/MQ__.svg)
+6. ![$X$](images/WA__.svg) désigne ![$\mathbb{N}$](images/XG1hdGhiYntOfQ__.svg) ou un sous-ensemble de ![$\mathbb{N}$](images/XG1hdGhiYntOfQ__.svg) tel que ![$1 \in X$](images/MSBcaW4gWA__.svg) et si ![$x \in X$](images/eCBcaW4gWA__.svg), alors ![$(x+1) \in X$](images/KHgrMSkgXGluIFg_.svg) sauf si ![$x$](images/eA__.svg) est le maximum de ![$X$](images/WA__.svg)
 
 ## Cycles
 
