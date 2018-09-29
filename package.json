@@ -1,0 +1,28 @@
+{
+  "name": "cycle-fonction-discrete",
+  "version": "1.0.0",
+  "description": "Travail de recherche en mathématiques pour la caractérisation et l'existence de cycles dans les fonctions discrètes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tex2svg": "tex2svg",
+    "btoa": "node btoa.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolasblackburn/cycles-fonctions-discretes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicolasblackburn/cycles-fonctions-discretes/issues"
+  },
+  "homepage": "https://github.com/nicolasblackburn/cycles-fonctions-discretes#readme",
+  "devDependencies": {
+    "btoa": "^1.2.1",
+    "ghmd2pdf": "^1.0.2",
+    "gitbook-cli": "^2.3.2",
+    "mathjax-node-cli": "^1.0.1"
+  },
+  "dependencies": {}
+}
