@@ -4,7 +4,7 @@ par Nicolas Blackburn
 
 ## Introduction
 
-Le sujet de cet article est l'étude des cycles d'une fonction définie sur un ensemble ![$X \subseteq \mathbb{N}$](images/WCBcc3Vic2V0ZXEgXG1hdGhiYntOfQ__.svg). Pour ce faire nous allons introduire une correspondance entre la fonction ![$f:X \to X$](images/ZjpYIFx0byBY.svg) et une matrice qui lui est associée, ![$\operatorname{Adj} f$](images/XG9wZXJhdG9ybmFtZXtBZGp9IGY_.svg), nommée la matrice d'adjacence de ![$f$](images/Zg__.svg). Cette matrice a la particularité d'agir sur les vecteurs unitaires naturels ![$\vec e_i$](images/XHZlYyBlX2k_.svg) d'une manière isomorphe à la fonction ![$f$](images/Zg__.svg) sur son ensemble de définition. 
+Le sujet de cet article est l'étude des cycles d'une fonction définie sur un ensemble _X &sube; &naturals;_. Pour ce faire nous allons introduire une correspondance entre la fonction ![$f:X \to X$](images/ZjpYIFx0byBY.svg) et une matrice qui lui est associée, ![$\operatorname{Adj} f$](images/XG9wZXJhdG9ybmFtZXtBZGp9IGY_.svg), nommée la matrice d'adjacence de ![$f$](images/Zg__.svg). Cette matrice a la particularité d'agir sur les vecteurs unitaires naturels ![$\vec e_i$](images/XHZlYyBlX2k_.svg) d'une manière isomorphe à la fonction ![$f$](images/Zg__.svg) sur son ensemble de définition. 
 
 De plus, nous verrons que l'étude du polynôme caractéristique de la matrice d'adjacence nous permet aussi de caractériser les cycles de la fonction en donnant le nombres de cycles distincts et leur ordre.
 
