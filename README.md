@@ -22,8 +22,8 @@ De plus, nous verrons que l'étude du polynôme caractéristique de la matrice d
 Soit une fonction *f : X &rightarrow; X*. On dit que *f* a un cycle d'ordre *k* s'il existe un élément *x &isin; X* tel que *f&hairsp;&hairsp;<sup>k</sup>(x) = x*, pour *k &gt; 0* et *k* entier. L'ordre du cycle contenant *x* est *k* si et seulement si *k* est le plus petit entier tel que *f&hairsp;&hairsp;<sup>k</sup>(x) = x*. On définit *C = (x<sub>1</sub> x<sub>2</sub> &ctdot; x<sub>k</sub>)* étant un cycle de *f*, *x<sub>i</sub> &isin; X* et *i &ne; j* implique *x<sub>i</sub> &ne; x<sub>j</sub>*. Alors 
 
 > *f(x<sub>i</sub>) =*<br>
-> &emsp;&emsp;&emsp; *x<sub>1</sub>*, si *i = k;*<br>
-> &emsp;&emsp;&emsp; *x<sub>i + 1</sub>*, si *i &lt; k*.
+> &emsp;&emsp; *x<sub>1</sub>*, si *i = k;*<br>
+> &emsp;&emsp; *x<sub>i + 1</sub>*, si *i &lt; k*.
 
 On a le cas particulier d'un cycle d'ordre *1* qui est appelé un point fixe.
 
@@ -32,19 +32,17 @@ On a le cas particulier d'un cycle d'ordre *1* qui est appelé un point fixe.
 Soit une fonction *f : X &rightarrow; X*, où *X = {x &isin; &naturals;: 1 &leq; x &leq; n}*. La matrice d'adjacence de *f* est une matrice carrée d'ordre *n*, définie comme étant
 
 > [Adj f]<sub><em>i, j</em></sub> =<br>
-> &emsp;&emsp;&emsp; <em>1</em>, si <em>f(j) = i</em>;<br>
-> &emsp;&emsp;&emsp; <em>0</em>, sinon.
+> &emsp;&emsp; <em>1</em>, si <em>f(j) = i</em>;<br>
+> &emsp;&emsp; <em>0</em>, sinon.
 
 On dit que cette matrice d'adjacence est totale.
 
 On peut aussi parler de matrice d'adjacence partielle de *f*, pour un entier *m &lt; n* (et *m &geq; 1*), qui est une matrice carrée d'ordre *m*, définie comme étant
 
 
-<dl>
-    <dt><em>[Adj f]<sub>i, j</sub> = </em></dt>
-    <dd><em>1</em>, si <em>f(j) = i</em> et <em>i &geq; m</em>;<dd>
-    <dd><em>0</em>, sinon.<dd>
-</dl>
+> [Adj f]<sub><em>i, j</em></sub> =<br>
+> &emsp;&emsp; <em>1</em>, si <em>f(j) = i</em> et <em>i &geq; m</em>;<br>
+> &emsp;&emsp; <em>0</em>, sinon.
 
 Dans les cas où la fonction *f* est plutôt définie sur *&naturals;*, alors on peut définir la matrice d'adjacence d'ordre *m* de la même manière.
 
@@ -58,11 +56,11 @@ Parfois, la fonction *f* elle-même peut être partielle, c'est-à-dire qu'elle 
 
 3. Prenons deux fonctions *f : X &rightarrow; X* et *g : X &rightarrow; X*. Posons *M<sub>f</sub> = Adj<sub>n</sub> f*, *M<sub>g</sub> = Adj<sub>n</sub> g* et considérons *e<sup>&rightarrow;</sup><sub>i</sub>* un vecteur unitaire naturel dans *&reals;<sup>n</sup>*, valant *1* à la *i*-ième composante et *0* pour toute autre composante. Alors
 
-    *M<sub>f</sub> e<sup>&rightarrow;</sup><sub>i</sub> = e<sup>&rightarrow;</sup><sub>f(i)</sub>*
+    > *M<sub>f</sub> e<sup>&rightarrow;</sup><sub>i</sub> = e<sup>&rightarrow;</sup><sub>f(i)</sub>*
 
     et 
 
-    *M<sub>f</sub> M<sub>g</sub> = M<sub>f &compfn; g</sub>*.
+    > *M<sub>f</sub> M<sub>g</sub> = M<sub>f &compfn; g</sub>*.
 
 ## Polynômes caractéristiques
 
