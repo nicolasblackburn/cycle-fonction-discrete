@@ -22,8 +22,8 @@ De plus, nous verrons que l'étude du polynôme caractéristique de la matrice d
 Soit une fonction *f : X &rightarrow; X*. On dit que *f* a un cycle d'ordre *k* s'il existe un élément *x &isin; X* tel que *f&hairsp;&hairsp;<sup>k</sup>(x) = x*, pour *k &gt; 0* et *k* entier. L'ordre du cycle contenant *x* est *k* si et seulement si *k* est le plus petit entier tel que *f&hairsp;&hairsp;<sup>k</sup>(x) = x*. On définit *C = (x<sub>1</sub> x<sub>2</sub> &ctdot; x<sub>k</sub>)* étant un cycle de *f*, *x<sub>i</sub> &isin; X* et *i &ne; j* implique *x<sub>i</sub> &ne; x<sub>j</sub>*. Alors 
 
 > *f(x<sub>i</sub>) =*
-> *x<sub>1</sub>*, si *i = k;*
-> *x<sub>i + 1</sub>*, si *i &lt; k*.
+> &emsp;&emsp;&emsp; *x<sub>1</sub>*, si *i = k;*
+> &emsp;&emsp;&emsp; *x<sub>i + 1</sub>*, si *i &lt; k*.
 
 On a le cas particulier d'un cycle d'ordre *1* qui est appelé un point fixe.
 
