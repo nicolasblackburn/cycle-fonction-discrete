@@ -31,11 +31,9 @@ On a le cas particulier d'un cycle d'ordre *1* qui est appelé un point fixe.
 
 Soit une fonction *f : X &rightarrow; X*, où *X = {x &isin; &naturals;: 1 &leq; x &leq; n}*. La matrice d'adjacence de *f* est une matrice carrée d'ordre *n*, définie comme étant
 
-<dl>
-    <dt><em>[Adj f]<sub>i, j</sub> = </em></dt>
-    <dd><em>1</em>, si <em>f(j) = i</em>;<dd>
-    <dd><em>0</em>, sinon.<dd>
-</dl>
+> [Adj f]<sub><em>i, j</em></sub> =<br>
+> &emsp;&emsp;&emsp; <em>1</em>, si <em>f(j) = i</em>;<br>
+> &emsp;&emsp;&emsp; <em>0</em>, sinon.
 
 On dit que cette matrice d'adjacence est totale.
 
