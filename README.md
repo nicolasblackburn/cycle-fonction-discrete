@@ -4,7 +4,7 @@ par Nicolas Blackburn
 
 ## Introduction
 
-Le sujet de cet article est l'étude des cycles d'une fonction définie sur un ensemble *X &sube; &naturals;*. Pour ce faire nous allons introduire une correspondance entre la fonction *f : X &rightarrow; X* et une matrice qui lui est associée, *Adj f*, nommée la matrice d'adjacence de *f*. Cette matrice a la particularité d'agir sur les vecteurs unitaires naturels *e<sup>&rightarrow;</sup><sub>i</sub>*d'une manière isomorphe à la fonction *f* sur son ensemble de définition. 
+Le sujet de cet article est l'étude des cycles d'une fonction définie sur un ensemble *X &sube; &naturals;*. Pour ce faire nous allons introduire une correspondance entre la fonction *f : X &rightarrow; X* et une matrice qui lui est associée, *Adj f*, nommée la matrice d'adjacence de *f*. Cette matrice a la particularité d'agir sur les vecteurs unitaires naturels *e<sup>&rightarrow;</sup><sub>i</sub>* d'une manière isomorphe à la fonction *f* sur son ensemble de définition. 
 
 De plus, nous verrons que l'étude du polynôme caractéristique de la matrice d'adjacence nous permet aussi de caractériser les cycles de la fonction en donnant le nombres de cycles distincts et leur ordre.
 
