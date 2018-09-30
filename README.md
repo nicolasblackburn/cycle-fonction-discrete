@@ -4,18 +4,18 @@ par Nicolas Blackburn
 
 ## Introduction
 
-Le sujet de cet article est l'étude des cycles d'une fonction définie sur un ensemble _X &sube; &naturals;_. Pour ce faire nous allons introduire une correspondance entre la fonction ![$f:X \to X$](images/ZjpYIFx0byBY.svg) et une matrice qui lui est associée, ![$\operatorname{Adj} f$](images/XG9wZXJhdG9ybmFtZXtBZGp9IGY_.svg), nommée la matrice d'adjacence de ![$f$](images/Zg__.svg). Cette matrice a la particularité d'agir sur les vecteurs unitaires naturels ![$\vec e_i$](images/XHZlYyBlX2k_.svg) d'une manière isomorphe à la fonction ![$f$](images/Zg__.svg) sur son ensemble de définition. 
+Le sujet de cet article est l'étude des cycles d'une fonction définie sur un ensemble *X &sube; &naturals;*. Pour ce faire nous allons introduire une correspondance entre la fonction *f : X &rightarrow; X* et une matrice qui lui est associée, *Adj f*, nommée la matrice d'adjacence de *f*. Cette matrice a la particularité d'agir sur les vecteurs unitaires naturels *e<sup>&rightarrow;</sup></span><sub>i*</sub> d'une manière isomorphe à la fonction *f* sur son ensemble de définition. 
 
 De plus, nous verrons que l'étude du polynôme caractéristique de la matrice d'adjacence nous permet aussi de caractériser les cycles de la fonction en donnant le nombres de cycles distincts et leur ordre.
 
 ## Notations et conventions
 
-1. ![$f^0(x) = x$](images/Zl4wKHgpID0geA__.svg), pour tout ![$x$](images/eA__.svg), autrement dit ![$f^0$](images/Zl4w.svg) est la fonction identité
-2. ![$f^1(x) = f(x)$](images/Zl4xKHgpID0gZih4KQ__.svg), pour tout $n$ entier et ![$n \geq 1$](images/biBcZ2VxIDE_.svg)
-3. ![$f^n(x) = f^{n-1}(f(x))$](images/Zl5uKHgpID0gZl57bi0xfShmKHgpKQ__.svg), pour tout ![$n$](images/bg__.svg) entier et [$n \geq 1$](images/biBcZ2VxIDE_.svg)
-4. ![$(f \circ g) (x) = f(g(x))$](images/KGYgXGNpcmMgZykgKHgpID0gZihnKHgpKQ__.svg), la composition de fonctions
-5. ![$\mathbb{N}$](images/XG1hdGhiYntOfQ__.svg) désigne l'ensemble des entiers plus grands ou égaux à ![$1$](images/MQ__.svg)
-6. ![$X$](images/WA__.svg) désigne ![$\mathbb{N}$](images/XG1hdGhiYntOfQ__.svg) ou un sous-ensemble de ![$\mathbb{N}$](images/XG1hdGhiYntOfQ__.svg) tel que ![$1 \in X$](images/MSBcaW4gWA__.svg) et si ![$x \in X$](images/eCBcaW4gWA__.svg), alors ![$(x+1) \in X$](images/KHgrMSkgXGluIFg_.svg) sauf si ![$x$](images/eA__.svg) est le maximum de ![$X$](images/WA__.svg)
+1. *f&hairsp;&hairsp;<sup>0</sup>(x) = x*,  pour tout *x*, autrement dit *f&hairsp;&hairsp;<sup>0</sup>* est la fonction identité
+2. *f&hairsp;&hairsp;<sup>1</sup>(x) = f(x)*, pour tout *n* entier et *n &geq; 1*
+3. *f&hairsp;&hairsp;<sup>n</sup>(x) = f&hairsp;&hairsp;<sup>n - 1</sup>(f(x))*, pour tout *n* entier et *n &geq; 1*
+4. *(f &compfn; g)(x) = f(g(x))*, la composition de fonctions
+5. *&naturals;* désigne l'ensemble des entiers plus grands ou égaux à *1*
+6. *X* désigne *&naturals;* ou un sous-ensemble de *&naturals;* tel que *1 &isin; X* et si *x &isin; X*, alors *x + 1 &isin; X* sauf si *x* est le maximum de *X*
 
 ## Cycles
 
