@@ -99,7 +99,7 @@
     \begin{equation}
       C^n(x) = \frac {3^\omega} {2^{\omega+\alpha_\omega}} x +
       \frac 1 2 \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}},
-      \label{Collatzn}
+      \label{collatz}
     \end{equation}
     $$
     où \(\omega\) est le nombre de \(C_i = C_{[1]}\) et \(\alpha_j\) est le nombre de \(C_i = C_{[0]}\) suivant le (\(\omega - j\))-ième \(C_{[1]}\), pour \(i\) allant de 0 à \(n - 1\) et \(j\) allant de 0 à \(\omega\). Pour le terme \(\alpha_\omega\), on le définit comme le nombre total de \(C_i = C_{[0]}\), pour \(i \lt n\).
@@ -124,7 +124,60 @@
     </p>
 
     <p>
+    L'inégalité suivante fournit des bornes suppérieure et inférieure à une fonction \(C^n\). Pour \(x \geq 0\), 
+    $$
+    \begin{equation}
+      (g^{\alpha_\omega} \circ h^\omega)(x) \leq C^n(x) \leq (h^\omega \circ g^{\alpha_\omega})(x)
+    \end{equation}
+    $$
+
+    où
+
+    $$
+      \begin{align}
+      (g^{\alpha_\omega} \circ h^\omega)(x) & = \frac {3^\omega} {2^{\omega + \alpha_\omega}} x + \frac {3^\omega - 2^\omega} {2^{\omega + \alpha_\omega}},
+ \\
+      (h^\omega \circ g^{\alpha_\omega})(x) & = \frac {3^\omega} {2^{\omega+\alpha_\omega}} x +
+      \frac {3^\omega - 2^\omega} {2^{\omega}},
+      \label{order}
+      \end{align}
+    $$
+    </p>
+
+    <p>
+    Pour une fonction \(f \in \left< g,  h \right>\),
+    $$
+    \begin{equation}
+    (g \circ f)(x) \leq (f \circ g)(x)
+    \label{order2}
+    \end{equation}
+    $$
+    </p>
+
+    <p>
+    Preuve de \(\eqref{order2}\): soit \(f(x) = ax + b\), alors:
+    $$
+    \begin{align*}
+    (g \circ f)(x) & = \frac a 2 x + \frac b 2 \\
+    (f \circ g)(x) & = \frac a 2 x + b \\
+    (g \circ f)(x) & \leq (f \circ g)(x)
+    \end{align*}
+    $$
+    </p>
+
+    <p>
     La principale question qui nous intéresse au sujet de la fonction Collatz est de savoir s'il existe d'autres cycles que (1, 2) dans les entiers positifs. Autrement dit, existe-t-il une fonction \(f \in \left< g, h \right>\) dont le point fixe est un entier positif différent de 1 et 2.
+    </p>
+
+    <p>
+    Voici la formule pour le calcul du point fixe d'une fonction \(f \in \left< g,  h \right>\):
+    $$
+    \DeclareMathOperator{\Fix}{Fix}
+    \begin{equation}
+    \Fix_f = \frac {2^{\omega + \alpha_\omega - 1}} {2^{\omega+\alpha_\omega} - 3^\omega} \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}},
+      \label{pointfixe}
+    \end{equation}
+    $$
     </p>
 
     <p>
@@ -184,6 +237,10 @@
         <td>\(h \circ h \circ g\)</td>
         <td>-10</td>
       </tr>
+      <tr>
+        <td>\(h \circ h \circ g \circ g\)</td>
+        <td>\(\frac 5 4\)</td>
+      </tr>
       </tbody>
     </table>
 
@@ -192,25 +249,7 @@
     </p>
 
     <p>
-    Puisque nous nous intéressont seulement aux cycles d'entiers positifs, nous devons trouver une condition pour que le point fixe soit plus grand que zéro. Prenons l'équation en \(\eqref{Collatzn}\) et remplaçons la partie qui ne dépend pas de \(x\) par une constante:
-    $$
-\begin{equation}
-      C^n(x) = \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + K.
-      \label{Collatzn2}
-    \end{equation}
-    $$
-    </p>
-
-    <p>
-    Posons \(C^n(x) = x\) et résolvons l'équation. Nous obtenons:
-
-    $$
-    \begin{align}
-      \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + K & = x \\
-      x& = \frac K {2^{\omega+\alpha_\omega} - {3^\omega}}
-    \end{align}
-
-    $$
+    Puisque nous sommes seulement intéressés par les cycles d'entiers positifs, nous devons trouver une condition pour que le point fixe soit plus grand que zéro. À partir de la formule \(\eqref{pointfixe}\), on voit qu'il est nécessaire et suffisant que \(2^{\omega + \alpha_\omega} \gt 3^\omega\). 
     </p>
 
     <p>
