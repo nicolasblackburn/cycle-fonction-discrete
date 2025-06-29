@@ -97,24 +97,43 @@
     Une formule générale pour \(C^n(x)\),
     $$
     \begin{equation}
-      C^n(x) = \frac {3^\omega} {2^{\omega+\alpha_\omega}} x +
-      \frac 1 2 \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}},
+      C^n(x) = \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac 1 2 \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}},
       \label{collatz}
     \end{equation}
     $$
-    où \(\omega\) est le nombre de \(C_i = C_{[1]}\) et \(\alpha_j\) est le nombre de \(C_i = C_{[0]}\) suivant le (\(\omega - j\))-ième \(C_{[1]}\), pour \(i\) allant de 0 à \(n - 1\) et \(j\) allant de 0 à \(\omega\). Pour le terme \(\alpha_\omega\), on le définit comme le nombre total de \(C_i = C_{[0]}\), pour \(i \lt n\).
+    où \(\omega\) est le nombre de \(C_j = C_{[1]}\) et \(\alpha_i\) est le nombre de \(C_j = C_{[0]}\) suivant le (\(\omega - i\))-ième \(C_{[1]}\), pour \(j\) allant de 0 à \(n - 1\) et \(i\) allant de 0 à \(\omega\). Pour le terme \(\alpha_\omega\), on le définit comme le nombre total de \(C_j = C_{[0]}\), pour \(j \lt n\).
     </p>
 
     <p>
+    Preuve: on peut facilement vérifier que l'équation est vrai pour 
     $$
     \begin{align*}
-      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {2^{\omega + \alpha_\omega - 1}} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}} \\
-      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} \frac {2^{\omega + \alpha_\omega - 1} \cdot 3^i} {2^{i+\alpha_i}} \\
-      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} {2^{\omega + \alpha_\omega - \alpha_i - i - 1} \cdot 3^i} \\
-      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} {2^{\beta_i} \cdot 3^i} \\
+    C_{[0]}(x) &= \frac {3^0} {2^1} x + \frac 1 2 \sum_{i=0}^{-1} \frac {3^i} {2^{i+\alpha_i}} \\
+    C_{[0]}(x) &= \frac x 2
     \end{align*}
     $$
-    où \(\beta_i\) est le nombre de termes qui précèdent le (\(\omega - i\))-ième \(C_{[1]}\).
+    et 
+    $$
+    \begin{align*}
+    C_{[1]}(x) &= \frac {3^1} {2^{1+\alpha_1}} x +
+    \frac 1 2 \sum_{i=0}^0 \frac {3^i} {2^{i+\alpha_i}} \\
+    C_{[1]}(x) &= \frac 3 2 x + \frac 1 2.
+    \end{align*}
+    $$
+    </p>
+
+    <p>
+    Supposons que la formule soit vrai pour une composition \(C^n\) de \(C_{[0]}\) et \(C_{[1]}\). Alors \(C_{[0]}(C^n(x))\) divise tous les termes de \(C^n(x)\) par 2 et incrémente tous les termes de \(\alpha_i\) par 1. Pour \(C_{[1]}\) on a:
+    $$
+    \begin{align*}
+    C_{[1]}(C^n(x)) &= \frac 3 2 (\frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac 1 2 \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}}) + \frac 1 2 \\
+    C_{[1]}(C^n(x)) &= \frac {3^{\omega + 1}} {2^{\omega + 1 + \alpha_\omega}} x + (\frac 3 {2^2} \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}}) + \frac 1 2 \\
+    C_{[1]}(C^n(x)) &= \frac {3^{\omega + 1}} {2^{\omega + 1 + \alpha_\omega}} x + (\frac 1 2 \sum_{i=0}^{\omega-1} \frac {3^{i + 1}} {2^{i + 1 + \alpha_i}}) + \frac 1 2 \\
+    C_{[1]}(C^n(x)) &= \frac {3^{\omega + 1}} {2^{\omega + 1 + \alpha_\omega}} x + \frac 1 2 \sum_{i=0}^{\omega} \frac {3^{i}} {2^{i + \alpha_i}} \\
+    C_{[1]}(C^n(x)) &= \frac {3^{\omega'}} {2^{\omega' + \alpha_{\omega'}}} x + \frac 1 2 \sum_{i=0}^{\omega'-1} \frac {3^{i}} {2^{i + \alpha_i}}\\
+    \end{align*}
+    $$
+    À noter que \(\alpha_{\omega'} = \alpha_\omega\) car aucun nouveau terme \(C_{[0]}\) n'a été introduit, et laisse ainsi les anciens termes de la suite \(\alpha_i\) inchangés.
     </p>
 
     <p>
@@ -127,6 +146,29 @@
       \frac {3^1} {2^{1+3}}
       \right) \\
       & = 1.
+    \end{align*}
+    $$
+    </p>
+
+    <p>
+    Une forme alternative à l'équation \(\eqref{collatz}\) est:
+    $$
+    \begin{equation}
+      C^n(x) = \frac {3^\omega} {2^n} x + \frac {1} {2^n} \sum_{i=0}^{\omega-1} {2^{\beta_i} \cdot 3^i} 
+    \end{equation}
+    $$
+    où \(\beta_i\) est le nombre de termes qui précèdent le (\(\omega - i\))-ième \(C_{[1]}\), ou ce qui est équivalent, l'index de ce terme dans \(C_j\).
+    </p>
+
+    <p>
+    Preuve:
+    $$
+    \begin{align*}
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {2^{\omega + \alpha_\omega - 1}} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}} \\
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} \frac {2^{\omega + \alpha_\omega - 1} \cdot 3^i} {2^{i+\alpha_i}} \\
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} {2^{\omega + \alpha_\omega - \alpha_i - i - 1} \cdot 3^i} \\
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} {2^{\beta_i} \cdot 3^i} \\
+      C^n(x) &= \frac {3^\omega} {2^n} x + \frac {1} {2^n} \sum_{i=0}^{\omega-1} {2^{\beta_i} \cdot 3^i} \\
     \end{align*}
     $$
     </p>
@@ -178,7 +220,7 @@
     </p>
 
     <p>
-    La principale question qui nous intéresse au sujet de la fonction Collatz est de savoir s'il existe d'autres cycles que (1, 2) dans les entiers positifs. Autrement dit, existe-t-il une fonction \(f \in \semigroupe\) dont le point fixe est un entier positif différent de 1 et 2.
+    La principale question qui nous intéresse au sujet de la fonction Collatz est de savoir s'il existe d'autres cycles que (1, 2) dans les entiers positifs. Autrement dit, existe-t-il une fonction \(f \in \semigroupe\) dont le point fixe est un entier positif différent de 1 et 2. S'il n'y en a pas, alors il ne peut y avoir d'autre cycle d'entiers positifs que (1, 2).
     </p>
 
     <p>
