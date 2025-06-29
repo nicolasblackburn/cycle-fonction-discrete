@@ -106,6 +106,18 @@
     </p>
 
     <p>
+    $$
+    \begin{align*}
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {2^{\omega + \alpha_\omega - 1}} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} \frac {3^i} {2^{i+\alpha_i}} \\
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} \frac {2^{\omega + \alpha_\omega - 1} \cdot 3^i} {2^{i+\alpha_i}} \\
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} {2^{\omega + \alpha_\omega - \alpha_i - i - 1} \cdot 3^i} \\
+      C^n(x) &= \frac {3^\omega} {2^{\omega+\alpha_\omega}} x + \frac {1} {2^{\omega + \alpha_\omega}} \sum_{i=0}^{\omega-1} {2^{\beta_i} \cdot 3^i} \\
+    \end{align*}
+    $$
+    où \(\beta_i\) est le nombre de termes qui précèdent le (\(\omega - i\))-ième \(C_{[1]}\).
+    </p>
+
+    <p>
     Exemple, on prend \(x_0 = 6\) et \(n = 6\). Alors la séquence des \(x_i\) est ( 6, 3, 5, 8, 4, 2, 1) et la séquence des \(C_i\) est (\(C_{[0]}\), \(C_{[1]}\), \(C_{[1]}\), \(C_{[0]}\), \(C_{[0]}\), \(C_{[0]}\), \(C_{[1]}\)). On a \(\omega = 2\) et la séquence \(\alpha_i\) est (3, 3, 4). On obtient
     $$
     \begin{align*}
@@ -120,7 +132,7 @@
     </p>
 
     <p>
-    On peut vouloir s'affranchir des termes \(x_i\) et simplement s'intéresser à l'ensemble des fonctions générées par \(g = C_{[0]}\) et \(h = C_{[1]}\) par composition, élargies au domaine \(\mathbb Q\). Nous dénoterons l'ensemble de ces fonctions par \(\left< g,  h \right> \).
+    On peut vouloir s'affranchir des termes \(x_i\) et simplement s'intéresser à l'ensemble des fonctions générées par \(g = C_{[0]}\) et \(h = C_{[1]}\) par composition, élargies au domaine \(\mathbb Q\). Nous dénoterons l'ensemble de ces fonctions par \(\newcommand{semigroupe}{\left< g,  h \right>}\semigroupe\).
     </p>
 
     <p>
@@ -145,7 +157,7 @@
     </p>
 
     <p>
-    Pour une fonction \(f \in \left< g,  h \right>\),
+    Pour une fonction \(f \in \semigroupe\),
     $$
     \begin{equation}
     (g \circ f)(x) \leq (f \circ g)(x)
@@ -166,11 +178,11 @@
     </p>
 
     <p>
-    La principale question qui nous intéresse au sujet de la fonction Collatz est de savoir s'il existe d'autres cycles que (1, 2) dans les entiers positifs. Autrement dit, existe-t-il une fonction \(f \in \left< g, h \right>\) dont le point fixe est un entier positif différent de 1 et 2.
+    La principale question qui nous intéresse au sujet de la fonction Collatz est de savoir s'il existe d'autres cycles que (1, 2) dans les entiers positifs. Autrement dit, existe-t-il une fonction \(f \in \semigroupe\) dont le point fixe est un entier positif différent de 1 et 2.
     </p>
 
     <p>
-    Voici la formule pour le calcul du point fixe d'une fonction \(f \in \left< g,  h \right>\):
+    Voici la formule pour le calcul du point fixe d'une fonction \(f \in \semigroupe\):
     $$
     \DeclareMathOperator{\Fix}{Fix}
     \begin{equation}
@@ -253,6 +265,25 @@
     </p>
 
     <p>
+    Si \(\Fix_f = x\), alors \(\Fix_{f^n} = x\), pour tout \(x \gt 0\).
+    </p>
+
+    <p>
+    Si \((x_0, x_1, \ldots, x_{n-1})\) est un \(n\)-cycle et \((C_0, C_1, \ldots, C_{n-1})\) est sa séquence de fonctions associée, alors 
+    $$
+    \begin{gather*}
+    \Fix_{C_{n-1} \circ \cdots \circ C_1 \circ C_0} = x_0 \\
+    \Fix_{C_0 \circ C_{n-1} \circ \cdots \circ C_1} = x_1 \\
+    \cdots \\
+    \Fix_{C_1 \circ C_0 \circ \cdots \circ C_{n-1}} = x_{n-1}.
+    \end{gather*}
+    $$
+    </p>
+
+    <p>Un corrolaire est le suivant. Soit \(f, f_i \in \semigroupe\) et \(f = f_{n-1} \circ \cdots \circ f_1 \circ f_0\). Si \(\Fix_f \notin \mathbb{N}\), alors il n'existe pas d'entier \(x\) tel que la séquence.
+    </p>
+
+    <p>
     $$
     2^{n \ln 3 / \ln 2} - 3^n \gt 0
     $$
@@ -290,6 +321,8 @@
       const ys = xs.map(x => 2**Math.ceil(x*LN_3_2) - 3**x);
       const us = xs.map(x => 3**x - 2**x);
       plot(xs, ys, xs, us);
+      plot(range(10), [19/5, 23/5, 29/5, 31/5, 37/5, 38/5, 46/5, 49/5, 58/5, 76/5]);
+      
     </script>
   </body>
 </html>
