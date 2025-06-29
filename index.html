@@ -280,21 +280,29 @@
     $$
     </p>
 
-    <p>Un corrolaire est le suivant. Soit \(f, f_i \in \semigroupe\) et \(f = f_{n-1} \circ \cdots \circ f_1 \circ f_0\). Si \(\Fix_f \notin \mathbb{N}\), alors il n'existe pas d'entier \(x\) tel que la séquence.
+    <p>Un corrolaire est le suivant. Soit \(f \in \semigroupe\), \(f_i \in \{g, h\}\) et \(f = f_{n-1} \circ \cdots \circ f_1 \circ f_0\). Si \(\Fix_f \notin \mathbb{N}\), alors \(f\), ni aucune rotation de \(f\) ne peuvent engendrer un cycle.
+    </p>
+
+    <p>
+    Il y a toute une classe de fonctions dans \(\semigroupe\) qui ne peuvent engendrer un cycle à cause du corrolaire précédent, ce qui réduit la recherce de manière significative. Soit \(S\), l'ensemble des fonctions dans \(\semigroupe\) telles que l'ordre des \(g\) qui composent \(f \in S\) est plus grand que \(\lceil \omega (\log_2 3 - 1) \rceil\), où \(\omega\) est l'ordre des \(h\). Alors aucune de ces fonctions ne peut engendrer un cycle.
+    </p>
+
+    <p>
+    Preuve: le point fixe a la forme \(\frac {2^\lambda \cdots K} {2^{\omega + \alpha_\omega} - 3^\omega}\) où \(\omega + \alpha_\omega \gt \lceil \omega \log_2 3 \rceil \). Le terme \(K\) est plus petit où égal à \(3^\omega - 2^\omega\), donc \(2^{\omega + \alpha_\omega} - 3^\omega \gt K\). Puisque \(2^{\omega + \alpha_\omega} - 3^\omega\) est impair, alors il ne divise pas \(2^\lambda\) ce qui implique que le point fixe est un rationel.
     </p>
 
     <p>
     $$
-    2^{n \ln 3 / \ln 2} - 3^n \gt 0
+    2^{\omega \log_2 3} - 3^\omega \gt 0
     $$
     </p>
 
     <p>
     $$
     \begin{align*}
-    \sum_{i=0}^n {\left( \frac 3 2 \right)^i} & = 
-    \frac {1 - \left( \frac 3 2 \right)^{n+1}} {1 - \frac 3 2} \\
-    & = \frac {3^{n+1} - 2^{n+1}} {2^n}
+    \sum_{i=0}^{\omega - 1} {\left( \frac 3 2 \right)^i} & = 
+    \frac {1 - \left( \frac 3 2 \right)^{\omega}} {1 - \frac 3 2} \\
+    & = \frac {3^{\omega} - 2^{\omega}} {2^{\omega - 1}}
     \end{align*}
     $$
     </p>
