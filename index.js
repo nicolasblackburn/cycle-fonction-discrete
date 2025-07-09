@@ -123,6 +123,70 @@ function qtostr([a, b]) {
     return `${a}/${b}`;
   }
 }
+/**
+ * Return an array containing gcd in index 0,
+ * and linear combination of a and b in index 1
+ * and 2.
+ */
+function euclide(a, b) {
+  if (b > a) {
+    const [r, r1, r0] = euclide(b, a);
+    return [r, r0, r1];
+  }
+  let r0 = a;
+  let r1 = b;
+  let q = Math.floor(r0 / r1);
+  let r2 = r0 - q * r1;
+  let v0 = [1, 0];
+  let v1 = [0, 1];
+  let v2 = [v0[0] - q * v1[0], v0[1] - q * v1[1]];
+  while (r2 > 0) {
+    r0 = r1;
+    r1 = r2;
+    q = Math.floor(r0 / r1);
+    r2 = r0 - q * r1;
+    v0 = v1;
+    v1 = v2;
+    v2 = [v0[0] - q * v1[0], v0[1] - q * v1[1]];
+  }
+  return [r1, ...v1];
+}
+/**
+ * Return all combinations of k
+ * elements choosen within s.
+ */
+function choosek(s, k) {
+  // console.log("choosek", s, k);
+  if (k > s.length) {
+    return [];
+  } else if (k === 0) {
+    return [[]];
+  } else {
+    const r = [];
+    for (let i = 0; i < s.length; i++) {
+      const x = s[i];
+      const rest = [...s.slice(i+1)];
+      choosek(rest, k - 1).forEach(s => {
+        r.push([x, ...s]);
+      });
+    }
+    // console.log(r);
+    return r;
+  }
+}
+
+function table(rs) {
+  const borders = [
+    "┌", "─", "┬", "─", "┐",
+    "│", " ", "│", " ", "│",
+    "├", "─", "┼", "─", "┤",
+    "│", " ", "│", " ", "│",
+    "└", "─", "┴", "─", "┘"
+  ];
+  const lines = rs.map(r => r.entries());
+  lines.shift(r[0].keys());
+  console.log("│ " + lines.join(" │ ") + " │");
+}
 
 console.table(
   range(20).map(
@@ -153,6 +217,78 @@ console.table(
     }
   )
 )
+
+console.table(
+  range(10).map(x => x + 1).map(omega => {
+    const n = Math.ceil(omega * Math.log(3) / Math.log(2));
+    const epsilon = n - omega;
+    return {
+      "ω": omega,
+      "ε": epsilon,
+      "min": qtostr(rational(3**omega - 2**omega, 2**n - 3**omega)),
+      "max": qtostr(rational(2**epsilon * (3**omega - 2**omega), 2**n - 3**omega))
+    };
+  })
+)
+
+range(5).map(x => x + 1).forEach(omega => {
+  const n = Math.ceil(omega * Math.log(3) / Math.log(2));
+  const epsilon = n - omega;
+  const a = 2**n;
+  const b = 3**omega;
+  let [gcd, u, v] = euclide(a, b); 
+  console.table([{
+    "ω": omega,
+    "ε": epsilon,
+    "min": qtostr(rational(3**omega - 2**omega, 2**n - 3**omega)),
+    "max": qtostr(rational(2**epsilon * (3**omega - 2**omega), 2**n - 3**omega)),
+    [`2^${n}`]: u, 
+    [`3^${omega}`]: v
+  }]);
+  console.table(choosek(range(n), omega).map(s => {
+    let f = range(n).map(_ => "g");
+    for (const i of s) {
+      f[n - i - 1] = "h";
+    }
+    const k = s.map((a, i) => 2**a*3**(omega - i - 1)).reduce((a, b) => a+b, 0);
+    return {
+      //s,
+      f: f.join(""),
+      //k,
+      [`mod 2^${n}`]: `x = ${(((-k) * v % a) + a) % a}`,
+      [`mod 3^${omega}`]: `x = ${((k * u % b) + b) % b}`
+    };
+  }));
+})
+
+r0 = a;
+r1 = b;
+r2 = r0 - q0 * r1;
+r3 = r1 - q1 * r2;
+...
+  r[n] = r[n-2] - q[n-2] * r[n-1];
+
+q[n] = floor(r[n+1] / r[n]);
+
+q(0) = 1;
+s(0) = [0, q];
+v(0) = [a, b];
+q(n) = ceil(v(n-1)[0] / v(n-1)[1])
+s(n) = [];
+v(n) = [v(n-1)[1], v(n-1)[0] % v(n-1)[1]]
+
+r1 - q1 * (r0 - q0 * r1) = r3
+r1 + q0 * q1 * r1 - q1 * r0 = r3
+(-q1) * r0 + (1 + q0 * q1) * r1 = r3
+
+...
+rn - qn * r(n+1) = 1
+
+gh = 3*x/4 + 1/4
+3*x = -1 mod 4
+x = -3 mod 4
+x = 1 mod 4
+
 
 /**
  * 2**n*x + a
