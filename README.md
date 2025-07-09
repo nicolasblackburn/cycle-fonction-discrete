@@ -6,3 +6,5 @@ Pour créer le pdf à partir du fichier .md, installer <a href="http://pandoc.or
 `pandoc cycle-fonction-discrete.md -o cycle-fonction-discrete.pdf`
 
 dans une ligne de commande.
+
+Travail en cours: <a href="https://nicolasblackburn.github.io/cycle-fonction-discrete/index.html">Étude de la fonction de Collatz</a>
