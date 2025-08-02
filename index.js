@@ -1,11 +1,22 @@
-function ng(x) { return x/2;}
-function nh(x) { return (1 + 3*x) / 2; }
-function nc(x) { return [ng, nh][x % 2](x); }
-function nginv(x) { return 2*x; }
-function nhinv(x) { return (2*x - 1) / 3; }
-function ncinv(x) { 
-  return [nginv, nginv, nhinv][x % 3](x); 
+function demiGroupeCollatz(...fns) {
+  fns.entries().reduce();
+  return new Proxy(function () {}, {
+    get(target, prop, receiver) {
+      console.log(prop);
+    },
+    apply(target, thisArg, argList) {
+    }
+  });
 }
+function g(x) { return x/2;}
+function h(x) { return (1 + 3*x) / 2; }
+function c(x) { return [g, h][(x % 2 + 2) % 2](x); }
+function gi(x) { return 2*x; }
+function hi(x) { return (2*x - 1) / 3; }
+function ci(x) { 
+  return [gi, gi, hi][x % 3](x); 
+}
+/*
 function g([a, b]) { return [qmult(a, rational(1, 2)), qmult(b, rational(1, 2))]; }
 function h([a, b]) { return [qadd(rational(1, 2), qmult(a, rational(3, 2))), qmult(b, rational(3, 2))]; }
 function tostr([a, [bn, bd]]) {
@@ -49,6 +60,7 @@ function ctostr2(x) {
   }
   return s;
 }
+*/
 function exponentnumber(n) {
   return [...(n).toString()].map(d => ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'][parseInt(d)]).join('');
 }
@@ -174,21 +186,33 @@ function choosek(s, k) {
     return r;
   }
 }
-
 function table(rs) {
-  const borders = [
-    "┌", "─", "┬", "─", "┐",
-    "│", " ", "│", " ", "│",
-    "├", "─", "┼", "─", "┤",
-    "│", " ", "│", " ", "│",
-    "└", "─", "┴", "─", "┘"
-  ];
-  const lines = rs.map(r => r.entries());
-  lines.shift(r[0].keys());
-  console.log("│ " + lines.join(" │ ") + " │");
+  let lines = rs.map(r => r.values?.() ?? Object.values(r));
+  lines.unshift(rs[0].keys?.() ?? Object.keys(rs[0]));
+  const colwidths = lines[0].map(_ => 0); 
+  for (const line of lines) {
+    for (let i = 0; i < line.length; i++) {
+      colwidths[i] = Math.max(colwidths[i] ?? 0, line[i].toString().length);
+    }
+  }
+  lines = lines.map(line =>
+    line.map((entry, i) => entry.toString().padEnd(colwidths[i])));
+  let out = "";
+  out += "┌─" + lines[0].map((_, i) => "".padEnd(colwidths[i], "─")).join("─┬─") + "─┐\n";
+  out += "│ " + lines[0].join(" │ ") + " │" + "\n";
+  out += "├─" + lines[0].map((_, i) => "".padEnd(colwidths[i], "─")).join("─┼─") + "─┤\n";
+  out += lines.slice(1)
+    .map(row => "│ " + row.join(" │ ") + " │")
+    .join("\n");
+  out += "\n└─" + lines[0].map((_, i) => "".padEnd(colwidths[i], "─")).join("─┴─") + "─┘";
+  console.log(out);
+}
+function mod(a, m) {
+  let b = a % m;
+  return b < 0 ? b + m : b;
 }
 
-console.table(
+table(
   range(20).map(
     i => 
     (x => 
@@ -205,7 +229,7 @@ console.table(
   )
 )
 
-console.table(
+table(
   range(20).map(
     omega => {
       const alpha = minevenorder(omega); 
@@ -218,7 +242,7 @@ console.table(
   )
 )
 
-console.table(
+table(
   range(10).map(x => x + 1).map(omega => {
     const n = Math.ceil(omega * Math.log(3) / Math.log(2));
     const epsilon = n - omega;
@@ -231,35 +255,109 @@ console.table(
   })
 )
 
-range(5).map(x => x + 1).forEach(omega => {
+range(7).forEach(x => {
+  const omega = x + 2;
   const n = Math.ceil(omega * Math.log(3) / Math.log(2));
   const epsilon = n - omega;
-  const a = 2**n;
-  const b = 3**omega;
+  const a = 3**omega;
+  const b = 2**n;
   let [gcd, u, v] = euclide(a, b); 
-  console.table([{
+  /*table([{
     "ω": omega,
     "ε": epsilon,
     "min": qtostr(rational(3**omega - 2**omega, 2**n - 3**omega)),
     "max": qtostr(rational(2**epsilon * (3**omega - 2**omega), 2**n - 3**omega)),
-    [`2^${n}`]: u, 
-    [`3^${omega}`]: v
-  }]);
-  console.table(choosek(range(n), omega).map(s => {
+    u,
+    v,
+    [`3^${omega}`]: a,
+    [`2^${n}`]: b, 
+  }]);*/
+  table(choosek(range(n - 3), omega - 2).map(s => {
+    s = [0, 1, ...s.map(x => x + 2)];
     let f = range(n).map(_ => "g");
     for (const i of s) {
-      f[n - i - 1] = "h";
+      f[i] = "h";
     }
-    const k = s.map((a, i) => 2**a*3**(omega - i - 1)).reduce((a, b) => a+b, 0);
+    const k = s.map((a, i) => 2**(n-a-1)*3**i).reduce((a, b) => a+b, 0);
     return {
       //s,
       f: f.join(""),
-      //k,
-      [`mod 2^${n}`]: `x = ${(((-k) * v % a) + a) % a}`,
-      [`mod 3^${omega}`]: `x = ${((k * u % b) + b) % b}`
+      //S_f: k,
+      [`mod 2^${n}`]: mod(k*-u, b),
+      [`mod 3^${omega}`]: mod(k*v, a),
+      //"Diff": mod(k*-u, b) - mod(k*v, a),
+      //[`mod X`]: mod(k*(b*v**2 - a*u**2), a*b),
+      //Fix_f: qtostr(rational(k, b - a)),
     };
   }));
+  // x doit être dans 18n+8 et dans les ensemble D_f et D_fi
 })
+
+(() => {
+  const g = x => x/2;
+  const h = x => (3*x-1)/2;
+  const f = [g,g,g,h,h,h,g,h,h,h,h];
+  const n = f.length;
+  const m = f.filter(x => x === h).length; 
+  let s = 0;
+  let i = 0;
+  let j = n - 1;
+  while (j >= 0 && i < m) {
+    if (f[n - j - 1] === h) {
+      s += 2**j*3**i;
+      i++;
+    }
+    j--;
+  }
+  const a = 3**m;
+  const b = 2**n;
+  let [gcd, na, nb] = euclide(a, b);
+  const p = mod(s*na, b);
+  const q = mod(s*-nb, a);
+  const r = mod(s*(a*na**2 - b*nb**2), a*b);
+  const t0 = -(-a*na*na + b*nb*nb);
+  const t1 = -(a*na*Math.abs(na) + b*nb*nb);
+  const t2 = -(a*na*Math.abs(na) + b*nb*(nb - Math.abs(na)) + b*nb*Math.abs(na));
+  const t3 = -((a*na + b*nb)*Math.abs(na) + b*nb*(nb - Math.abs(na)));
+  const t4 = -(Math.abs(na) + b*nb*(nb - Math.abs(na)));
+  const t5 = -Math.abs(na) + b*nb*Math.abs(na) - b*nb*nb;
+  const t6 = mod(s*(-Math.abs(na) + b*nb*Math.abs(na) - b*nb*nb), b);
+  table([{s, a, na, b, nb, p, q, r}]);
+  table([{"...": "...", t4, t5, t6}]);
+})()
+
+(() => {
+  const s = 211;
+  const a = 3**5;
+  const b = 2**8;
+  let [gcd, na, nb] = euclide(a, b);
+  //if (inva < 0) {
+  //  inva += a;
+  //}
+  //if (invb < 0) {
+  //  invb += b;
+  //}
+  const p = mod(s*-na, b);
+  const q = mod(s*nb, a);
+  const r = mod(s*(b*nb**2 - a*na**2), a*b);
+  console.log(p,q,r);
+})()
+
+/*
+f(x) = ax + b
+fix_f = b / (1 - a)
+
+f(x) = ax + b
+f'(x) = ax / 2 + b
+fix_f = p / q
+fix_f' = 2b / (2 - a)
+b = p
+a = 1 - q
+fix_f' = 2p / (1 + q) 
+*/
+
+
+Fix_f(x) = S(f) / (2**(n) - 3**(m))
 
 r0 = a;
 r1 = b;

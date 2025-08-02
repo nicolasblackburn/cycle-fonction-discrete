@@ -67,10 +67,79 @@
       function qprint([a, b]) {
         document.body.append(`\\(\\frac {${a}} {${b}}\\)`);
       }
+function qtostr([a, b]) {
+  if (a === 0) {
+    return "0";
+  } else if (a === b) {
+    return "1";
+  } else {
+    return `${a}/${b}`;
+  }
+}
 
       function range(n) {
         return [...new Array(n).keys()];
       }
+
+      function table(rs) {
+        let lines = rs.map(r => r.values?.() ?? Object.values(r));
+        lines.unshift(rs[0].keys?.() ?? Object.keys(rs[0]));
+        let html = "";
+        html += `<thead><tr>${lines[0].map(row => row.map(x => `<th>${x}</th>`)).join("")}</tr></thead><tbody>`;
+        html += `${lines.slice(1).map(row => `<tr>${row.map(x => `<td>${x}</td>`).join("")}</tr>`)}</tbody>`;
+        const table = document.createElement("table");
+        table.innerHTML = table;
+        document.body.append(table);
+       }
+
+function mod(a, m) {
+  let b = a % m;
+  return b < 0 ? b + m : b;
+}
+
+function euclide(a, b) {
+  if (b > a) {
+    const [r, r1, r0] = euclide(b, a);
+    return [r, r0, r1];
+  }
+  let r0 = a;
+  let r1 = b;
+  let q = Math.floor(r0 / r1);
+  let r2 = r0 - q * r1;
+  let v0 = [1, 0];
+  let v1 = [0, 1];
+  let v2 = [v0[0] - q * v1[0], v0[1] - q * v1[1]];
+  while (r2 > 0) {
+    r0 = r1;
+    r1 = r2;
+    q = Math.floor(r0 / r1);
+    r2 = r0 - q * r1;
+    v0 = v1;
+    v1 = v2;
+    v2 = [v0[0] - q * v1[0], v0[1] - q * v1[1]];
+  }
+  return [r1, ...v1];
+}
+
+function choosek(s, k) {
+  // console.log("choosek", s, k);
+  if (k > s.length) {
+    return [];
+  } else if (k === 0) {
+    return [[]];
+  } else {
+    const r = [];
+    for (let i = 0; i < s.length; i++) {
+      const x = s[i];
+      const rest = [...s.slice(i+1)];
+      choosek(rest, k - 1).forEach(s => {
+        r.push([x, ...s]);
+      });
+    }
+    // console.log(r);
+    return r;
+  }
+}
     </script>
   </head>
   <body>
@@ -86,11 +155,16 @@
       \end{align*}
     $$
     </p>
+
     <p>
-    Soit \(x \in \mathbb N\), alors on s'intéresse à 2 séquences
-    $$x_i = C^i(x)$$
+    Soit \(\newcommand{nat}{\mathbb N} x \in \nat\), alors on s'intéresse à 2 séquences
+    $$x_i = C^i(x), i \text{ allant de } 0 \text{ à } n - 1$$
     et
-    $$C_i = C_{[x_i]}.$$
+    $$C_i = C_{[x_i]}, i \text{ allant de } 0 \text{ à } n - 2.$$
+    </p>
+
+    <p>
+    L'ordre de \(x_i\) est \(n\), la longeur de la séquence et le \(m\)-ordre de \(x_i\) est l'ordre des termes de \(x_i\) congruents à \(m \mod 2\).
     </p>
 
     <p>
@@ -183,18 +257,26 @@
     </p>
 
     <p>
-    On peut vouloir s'affranchir des termes \(x_i\) et simplement s'intéresser à l'ensemble des fonctions générées par \(g = C_{[0]}\) et \(h = C_{[1]}\) par composition, élargies au domaine \(\mathbb Q\). Nous dénoterons l'ensemble de ces fonctions par \(\newcommand{semigroupe}{\left< g,  h \right>}\semigroupe\).
+    On peut vouloir s'affranchir des termes \(x_i\) et simplement s'intéresser à l'ensemble des fonctions générées par \(g = C_{[0]}\) et \(h = C_{[1]}\) par composition, élargies au domaine \(\newcommand{ratio}{\mathbb Q}\ratio\). Nous dénoterons l'ensemble de ces fonctions par \(\newcommand{semigroupe}{\left< g,  h \right>}\semigroupe\).
     </p>
 
     <p>
-    Relation de congruence, pour \(f \in \semigroupe\) et \(f^{-1}\), sa fonction inverse. On pose \(S_f = \sum_{i=0}^{\omega - 1} {2^{\beta_i}3^i}\):
+    Relation de congruence, pour \(f \in \semigroupe\) et \(f^{-1}\), sa fonction inverse. Soit \(f_n \circ \cdots \circ f_2 \circ f_1 = f\), la factorisation de \(f\) en termes \(g\) et \(h\). On définit \(\omega\) étant l'ordre des \(f_i = h\). On pose \(S_f = \sum_{i=0}^{\omega - 1} {2^{\beta_i}3^i}\):
     $$
     \begin{align}
-    x &= -3^{-\omega}S_f \mod 2^{\omega+\alpha} \\
-    x &= 2^{-(\omega+\alpha)}S_f \mod 3^{\omega} \\
-    x &= \left( 2^{\omega+\alpha}2^{-2(\omega+\alpha)}_{\mod 3^{\omega}} - 3^\omega 3^{-2\omega}_{\mod 2^{\omega+\alpha}} \right) S_f \mod 2^{\omega+\alpha}3^{\omega} \\
+    x &\equiv -3^{-\omega}S_f \bmod 2^{n} \label{congruenceavant} \\
+    x &\equiv 2^{-n}S_f \bmod 3^{\omega} \label{congruencearriere} \\
+    x &\equiv \left( 2^{n} \left[2^{-2n} \right]_{3^{\omega}} - 3^\omega \left[ 3^{-2\omega} \right]_{2^{n}} \right) S_f \bmod 2^{n}3^{\omega} \label{congruence} \\
     \end{align}
     $$
+    </p>
+
+    <p>
+    Si \(x \in \nat\) et \(x\) respecte la relation de congruence en \(\eqref{congruenceavant}\), alors \(f(x)\) est bien défini dans \(\nat\). Est-ce le cas pour tous les \(f_i(x)\)? Si \(x\) respecte la relation de congruence en \(\eqref{congruencearriere}\), alors \(f^{-1}(x)\) est bien défini dans \(\nat\) et si \(x\) respecte la relation de congruence en \(\eqref{congruence}\), alors autant \(f(x)\) que \(f^{-1}(x)\) sont bien définis dans \(\nat\). 
+    </p>
+
+    <p>
+    Si \(\left[ -3^{-\omega} \right]_{2^n} = \left[ 2^{-n} \right]_{3^{\omega}}\), alors on a un cycle. 
     </p>
 
     <p>
@@ -342,7 +424,7 @@
     $$
     </p>
 
-    <p>Un corrolaire est le suivant. Soit \(f \in \semigroupe\), \(f_i \in \{g, h\}\) et \(f = f_{n-1} \circ \cdots \circ f_1 \circ f_0\). Si \(\Fix_f \notin \mathbb{N}\), alors \(f\), ni aucune rotation de \(f\) ne peuvent engendrer un cycle.
+    <p>Un corrolaire est le suivant. Soit \(f \in \semigroupe\), \(f_i \in \{g, h\}\) et \(f = f_{n-1} \circ \cdots \circ f_1 \circ f_0\). Si \(\Fix_f \notin \nat\), alors \(f\), ni aucune rotation de \(f\) ne peuvent engendrer un cycle.
     </p>
 
     <p>
@@ -368,22 +450,6 @@
     \end{align*}
     $$
     </p>
-
-    <script>
-      function* nat() {
-        yield 0;
-        for (const n of nat()) {
-          yield 1 + n;
-        }
-      }
-      (() => {
-        const g = nat();
-        const div = document.createElement("pre");
-        documeny.body.append(pre);
-        pre.innerHTML += g.next() + "\n";
-        
-      })()
-    </script>
 
     <script>
       const LN_3_2 = Math.log(3) / Math.log(2);
